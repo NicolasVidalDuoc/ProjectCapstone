@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Editar Noticia</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>
+
+<a href="{% url 'detalle_noticia' noticias.id %}" class="btn btn-secondary">Volver a los detalles de la noticia</a>
+<a href="{% url 'listar_noticia' %}" class="btn btn-secondary">Volver a la lista de noticias</a>
+{% endblock %}

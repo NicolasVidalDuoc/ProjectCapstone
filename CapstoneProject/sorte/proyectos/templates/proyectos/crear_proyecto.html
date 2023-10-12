@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Crear Nuevo Proyecto</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Crear Proyecto</button>
+</form>
+
+<a href="{% url 'listar_proyectos' %}" class="btn btn-secondary">Volver a la lista de los proyectos</a>
+{% endblock %}

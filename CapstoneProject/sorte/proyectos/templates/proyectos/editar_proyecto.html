@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Editar Proyecto</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>
+
+<a href="{% url 'detalle_proyecto' proyectos.id %}" class="btn btn-secondary">Volver a los detalles del proyecto</a>
+<a href="{% url 'listar_proyectos' %}" class="btn btn-secondary">Volver a la lista de los proyectos</a>
+{% endblock %}

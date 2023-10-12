@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{proyectos.nombre_proyecto}}</h5>
+        <p class="card-text">{{proyectos.descripcion}}</p>
+        <p class="card-text"><b>Requisitos </b>: {{proyectos.requisitos}}</p>
+        <p class="card-text"><b>Cupo disponible </b>: {{proyectos.cupos_disponibles_proyecto}}</p>
+        <p class="card-text"><b>Fecha Inicio para postulación </b>: {{proyectos.fecha_inicio}}</p>
+        <p class="card-text"><b>Fecha Término para postulación </b>: {{proyectos.fecha_termino}}</p>
+    </div>
+    <div class="card-footer text-center">
+        <small class="text-muted"><b>Fecha de Creación</b>: {{proyectos.fecha_creacion_proyecto}}</small><br>
+        <small class="text-muted"><b>Fecha de Actualización</b>: {{proyectos.fecha_actualización_proyecto}}</small><br>
+    </div>
+</div>
+<!-- Mostrar otros detalles de la actividad aquí -->
+<a href="{% url 'inscribir_proyecto' proyectos.id %}" class="btn btn-primary">Inscribirse</a>
+<a href="{% url 'listar_proyectos' %}" class="btn btn-secondary">Volver a la lista de proyectos</a>
+{% endblock %}

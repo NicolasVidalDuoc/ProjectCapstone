@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SORTE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- Menú de Navegación -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Eleventh navbar example">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'inicio' %}">SORTE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarsExample09">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'listar_noticia' %}">Noticias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'listar_proyectos' %}">Proyectos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'listar_actividad' %}">Actividades</a>
+                        </li>
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'mis_solicitudes' %}">Solicitudes Proyectos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'mis_solicitudes_miembro' %}">Solicitudes Actividades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'profile_user' %}">Mi perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'update_profile_user' %}">Actualizar datos</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{% url 'register_user' %}">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar sesión</a>
+                        </li>
+                        {% endif %}
+
+                        {% if user.is_staff %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown"
+                                aria-expanded="false">Administración</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'crear_proyecto' %}">Crear Proyecto</a></li>
+                                <li><a class="dropdown-item" href="{% url 'crear_actividad' %}">Crear Actividad</a></li>
+                                <li><a class="dropdown-item" href="{% url 'crear_noticia' %}">Crear Noticia</a></li>
+                                <li><a class="dropdown-item" href="{% url 'gestionar_solicitudes' %}">Solicitudes Proyectos</a>
+                                <li><a class="dropdown-item" href="{% url 'gestionar_inscripciones' %}">Solicitudes Actividades</a>
+                                <li><a class="dropdown-item" href="{% url 'generar_certificado' %}">Generar certificado</a>
+                                </li>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Carrusel de imagenes -->
+    <div class="container">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'core/img/slider1.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'core/img/slider2.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'core/img/slider3.jpg' %}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+    <!-- Fin de carrusel de imagenes -->
+
+    <hr>
+
+    <!-- Contenido -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Inicio</a>
+                </li>
+                <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Noticias</a>
+                </li>
+                <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Proyectos</a></li>
+                <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Actividades</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">&copy; 2023 SORTE, Inc</p>
+        </footer>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                Swal.fire({
+                    "title": "Felicitaciones",
+                    "text": "{{message}}",
+                    "icon": "success",
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
+
+    {% block js %}
+    {% endblock %}
+
+</body>
+
+</html>

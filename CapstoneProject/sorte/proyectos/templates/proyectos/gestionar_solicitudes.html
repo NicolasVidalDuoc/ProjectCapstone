@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% block content %}
+  <h1>Gestionar Solicitudes</h1>
+
+  <h2>Solicitudes Pendientes</h2>
+  <ul>
+    {% for solicitud in solicitudes_pendientes %}
+      <li>{{ solicitud.miembro.rut }} - {{ solicitud.miembro.first_name }} - {{ solicitud.proyecto.nombre_proyecto }}
+        <form method="post" action="{% url 'gestionar_solicitudes' %}">
+          {% csrf_token %}
+          <input type="hidden" name="solicitud_id" value="{{ solicitud.id }}">
+          <button type="submit" name="decision" value="aceptar" class="btn btn-success">Aceptar</button>
+          <button type="submit" name="decision" value="rechazar" class="btn btn-danger">Rechazar</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Solicitudes Aceptadas</h2>
+  <ul>
+    {% for solicitud in solicitudes_aceptadas %}
+      <li>{{ solicitud.miembro.rut }} - {{ solicitud.proyecto.nombre_proyecto }} (Aceptada)</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Solicitudes Rechazadas</h2>
+  <ul>
+    {% for solicitud in solicitudes_rechazadas %}
+      <li>{{ solicitud.miembro.rut }} - {{ solicitud.proyecto.nombre_proyecto }} (Rechazada)</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Actualiza tus datos</h1>
+<p>Actualiza los datos de tu cuenta</p>
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="first_name" aria-describedby="emailHelp"
+            value="{{ form.first_name.value|default:'' }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="last_name" aria-describedby="emailHelp"
+            value="{{ form.last_name.value|default:'' }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Correo</label>
+        <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+            value="{{ form.email.value|default:'' }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar datos</button>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% block content %}
+<h1>Inscribirse en {{ proyecto.nombre_proyecto }}</h1>
+{% if proyecto.cupos_disponibles_proyecto > 0 %}
+<form method="post" action="{% url 'inscribir_proyecto' proyecto.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Presiona este botón para Postular</button>
+</form>
+{% else %}
+<p>Lo sentimos, los cupos para este proyecto están agotados.</p>
+{% endif %}
+
+{% endblock %}

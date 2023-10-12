@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 style="text-align: center;">Página de Proyectos</h1>
+<p style="text-align: center;">Aquí encontrarás todas los Proyectos de SORTE</p>
+<div class="container">
+    <div class="row">
+        {% for proyecto in proyectos %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if proyecto.imagen_proyecto %}
+                        <img class="img-fluid" src="{{ proyecto.imagen_proyecto.url }}" alt="">
+                    {% else %}
+                        <p>No hay imagen disponible</p>
+                    {% endif %}
+                    <h5 class="card-title">{{proyecto.nombre_proyecto}}</h5>
+                    <p class="card-text">{{proyecto.descripcion}}</p>
+                    <p class="card-text"><b>Requisitos </b>: {{proyecto.requisitos}}</p>
+                    <p class="card-text"><b>Cupos disponibles </b>: {{proyecto.cupos_disponibles_proyecto}}</p>
+                    <p class="card-text"><b>Fecha Inicio para postulación </b>: {{proyecto.fecha_inicio}}</p>
+                    <p class="card-text"><b>Fecha Término para postulación </b>:{{proyecto.fecha_termino}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted"><b>Fecha de Creación </b>:
+                        {{proyecto.fecha_creacion_proyecto}}</small><br>
+                    <small class="text-muted"><b>Fecha de Actualización </b>:
+                        {{proyecto.fecha_actualización_proyecto}}</small><br>
+                </div>
+
+                {% if user.is_staff %}
+                <div class="card-footer text-center">
+                    <a href="{% url 'editar_proyecto' proyecto.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_proyecto' proyecto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'detalle_proyecto' proyecto.id %}" class="btn btn-success btn-sm">Ver mas detalles</a>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% block content %}
+<h1>Te estas inscribiendo en la {{ actividad.nombre_actividad }}</h1>
+
+{% if actividad.cupos_disponibles > 0 %}
+<form method="post" action="{% url 'inscribir_actividad' actividad.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Presiona este botón para Inscribirte</button>
+</form>
+{% else %}
+<p>Lo siento, los cupos para esta actividad están agotados.</p>
+{% endif %}
+{% endblock %}

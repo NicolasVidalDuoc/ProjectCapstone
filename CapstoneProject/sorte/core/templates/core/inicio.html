@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 style="text-align: center;">Bienvenido a la página de inicio</h1>
+<h2 style="text-align: center;">Aquí encontrarás todos los beneficios de SORTE</h2>
+
+{% if user.is_authenticated %}
+<div class="d-grid gap-2 col-2 mx-auto">
+    <a href="{% url 'logout' %}" class="btn btn-success btn-sm">Cerrar sesión</a>
+</div>
+{% else %}
+<div class="d-grid gap-2 col-2 mx-auto">
+    <a href="{% url 'login' %}" class="btn btn-success btn-sm">Iniciar sesión</a>
+    <a href="{% url 'register_user' %}" class="btn btn-primary btn-sm">Registrarse</a>
+</div>
+{% endif %}
+{% endblock %}

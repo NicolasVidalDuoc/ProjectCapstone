@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<h1>Login</h1>
+<p>Inicia sesión con tu cuenta</p>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="rut" class="form-label">Rut</label>
+        <input type="text" class="form-control" name="rut" aria-describedby="emailHelp" placeholder="Ej: xx.xxx.xxx-x o x.xxx.xxx-x">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="password" placeholder="Ingresa aquí tu contraseña">
+    </div>
+    <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="6Lc2b4soAAAAAEu6juMfcYhOXGLILXFtLmrJWJ_Z"></div>
+    </div>
+    <button type="submit" class="btn btn-success">Iniciar sesión</button>
+    <br>
+    <p>Aun no estas inscrito en SORTE, puedes hacerlo haciendo click <a href="{% url 'register_user' %}">aquí</a></p>
+    <p>¿Olvidaste tu contraseña?, puedes cambiarla haciendo click <a href="{% url 'reset_password' %}">aquí</a></p>
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+asgiref     3.7.2
+Django      4.2.6
+mysqlclient 2.2.0 --> Se utiliza para trabajar con el gestor de bases de datos MySQL Workbench.
+Pillow      10.0.1 --> Se utiliza para trabajar con imagenes en los modelos de django.
+pip         23.2.1 
+PyMySQL     1.1.0 --> Se utiliza para trabajar con el gestor de bases de datos MySQL Workbench.
+reportlab   4.0.5 --> Se utiliza para generar pdfs en django.
+setuptools  68.2.0
+six         1.16.0 --> Se utiliza para generar tokens de autenticación de usuarios mediante la activación del correo.
+sqlparse    0.4.4
+tzdata      2023.3
+wheel       0.41.2
+django-recaptcha 3.0.0 --> Se utiliza para comprobar que el usuario no es un robot

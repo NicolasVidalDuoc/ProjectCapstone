@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{noticias.titulo}}</h5>
+        <p class="card-text">{{noticias.subtitulo}}</p>
+        <p class="card-text">{{noticias.descripcion}}</p>
+    </div>
+    <div class="card-footer text-center">
+        <small class="text-muted"><b>Fecha de Creación</b>: {{noticias.fecha_de_creacion}}</small><br>
+        <small class="text-muted"><b>Fecha de Actualización</b>: {{noticias.fecha_de_actualizacion}}</small><br>
+    </div>
+</div>
+<!-- Mostrar otros detalles de la actividad aquí -->
+<a href="{% url 'editar_noticia' noticia.id %}" class="btn btn-primary">Editar Noticia</a>
+<a href="{% url 'eliminar_noticia' noticia.id %}" class="btn btn-danger">Eliminar Noticia</a>
+<a href="{% url 'listar_noticia' %}" class="btn btn-secondary">Volver a la lista de noticias</a>
+{% endblock %}

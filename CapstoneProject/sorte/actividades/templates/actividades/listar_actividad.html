@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+
+{% block js %}
+    <script>
+        function eliminarActividad(id) {
+            Swal.fire({
+                "title": "¿Estás seguro que quieres eliminar esta actividad?",
+                "text": "¡Esta acción no se puede deshacer!",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, cancelar",
+                "confirmButtonText": "Si, eliminar",
+                "reverseButtons": true,
+                "confirmButtonColor": "#dc3545",
+            })
+            .then(function(result){
+                if(result.isConfirmed) {
+                    window.location.href = "actividades/eliminar/"+id+"/"
+                }
+            })
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center;">Página de Actividades</h1>
+<p style="text-align: center;">Aquí encontrarás todas las actividades de SORTE</p>
+<div class="container">
+    <div class="row">
+        {% for actividad in actividades %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if actividad.imagen_actividad %}
+                        <img class="img-fluid" src="{{ actividad.imagen_actividad.url }}" alt="">
+                    {% else %}
+                        <p>No hay imagen disponible</p>
+                    {% endif %}
+                    <h5 class="card-title">{{ actividad.nombre_actividad }}</h5>
+                    <p class="card-text"><b>Descripción:</b> {{actividad.descripcion}}</p>
+
+                    {% if user.is_authenticated %}
+                    <p class="card-text"><b>Dirección:</b> {{actividad.direccion}}</p>
+                    <p class="card-text"><b>Región:</b> {{actividad.region}} - Región Metropolitana</p>
+                    <p class="card-text"><b>Comuna:</b> {{actividad.comuna}}</p>
+                    <p class="card-text"><b>Cupo disponible:</b> {{ actividad.cupos_disponibles }}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted"><b>Fecha de Actividad:</b> {{actividad.fecha_actividad}}</small><br>
+                    <small class="text-muted"><b>Hora de Inicio:</b> {{actividad.hora_inicio}}</small><br>
+                    <small class="text-muted"><b>Hora de Término:</b> {{actividad.hora_termino}}</small><br>
+                    {% endif %}
+
+                    <p class="card-text"><b>Si quieres participar de las distintas actividades impartidas por la Junta de Vecinos debes ser miembro</b></p>
+                </div>
+
+                {% if user.is_staff %}
+                <div class="card-footer text-center">
+                    <a href="{% url 'editar_actividad' actividad.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="#" onclick="eliminarActividad({{ actividad.id }})" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'detalle_actividad' actividad.id %}">Ver mas detalles</a>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

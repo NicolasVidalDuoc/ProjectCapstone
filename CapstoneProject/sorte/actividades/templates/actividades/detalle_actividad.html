@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{actividades.nombre_actividad}}</h5>
+        <p class="card-text">{{actividades.descripcion}}</p>
+        <p class="text-center"><b>Fecha de Actividad</b>: {{actividades.fecha_actividad}}</p><br>
+        <p class="text-center"><b>Cupo disponible</b>: {{actividades.cupos_disponibles}}</p>
+        <p class="text-center"><b>Hora de Inicio</b>: {{actividades.hora_inicio}}</p><br>
+        <p class="text-center"><b>Hora de Término</b>: {{actividades.hora_termino}}</p><br>
+    </div>
+</div>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'inscribir_actividad' actividades.id %}" class="btn btn-success">Inscribirse</a>
+    {% endif %}
+        <a href="{% url 'listar_actividad' %}" class="btn btn-secondary">Volver a la lista de actividades</a>
+    
+{% endblock %}

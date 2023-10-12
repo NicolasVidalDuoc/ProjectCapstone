@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<h1>Register</h1>
+<p>Regístrate con tu cuenta</p>
+<form action="{% url 'register_user' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="rut" class="form-label">Rut</label>
+        <input type="text" class="form-control" name="rut" aria-describedby="emailHelp"
+            value="{{ form.rut.value|default:'' }}" placeholder="Ej: xx.xxx.xxx-x o y.yyy.yyy-y">
+        {% if form.errors.rut %}
+        <div class="alert alert-danger">
+            <strong>Error en el rut:</strong>
+            {{ form.errors.rut }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        <label for="first_name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="first_name" aria-describedby="emailHelp"
+            value="{{ form.first_name.value|default:'' }}" placeholder="Ej: Carlos">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="last_name" aria-describedby="emailHelp"
+            value="{{ form.last_name.value|default:'' }}" placeholder="Ej: Vidal">
+    </div>
+
+    <div class="mb-3">
+        <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+        {% if form.errors.birthdate %}
+        <div class="alert alert-danger">
+            <strong>Error en este campo:</strong>
+            {{ form.errors.birthdate }}
+        </div>
+        {% endif %}
+        <input type="date" class="form-control" name="birthdate" aria-describedby="emailHelp"
+            value="{{ form.instance.birthdate|default:'' }}">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Dirección</label>
+        <input type="text" class="form-control" name="address" aria-describedby="emailHelp"
+            value="{{ form.address.value|default:'' }}" placeholder="Ej: Antonio Rudiguer 7458">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo</label>
+        {% if form.errors.email %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error en el correo:</strong>
+            {{ form.errors.email }}
+        </div>
+        {% endif %}
+        <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+            value="{{ form.email.value|default:'' }}" placeholder="Ej: prueba@prueba.com">
+    </div>
+    <div class="mb-3">
+        <label for="id_gender">Género</label>
+        <select id="id_gender" name="gender" class="form-select">
+            <option value="">Selecciona tu género</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+            <option value="N">Prefiero no decirlo</option>
+        </select>
+
+        {% if form.errors.gender %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error en el género:</strong>
+            {{ form.errors.gender }}
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    <div class="mb-3">
+        <label for="password1" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="password1" placeholder="Ingresa aquí tu contraseña">
+        {% if form.errors.password1 %}
+        <div class="alert alert-danger">
+            <strong>Error en la contraseña:</strong>
+            {{ form.errors.password1 }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        <label for="password2" class="form-label">Confirmar Contraseña</label>
+        <input type="password" class="form-control" name="password2" placeholder="Confirma aquí tu contraseña">
+        {% if form.errors.password2 %}
+        <div class="alert alert-danger">
+            <strong>Error en la contraseña:</strong>
+            {{ form.errors.password2 }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="6Lc2b4soAAAAAEu6juMfcYhOXGLILXFtLmrJWJ_Z"></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Regístrate</button>
+    <p>Ya estás inscrito en SORTE, puedes iniciar sesión con tu cuenta haciendo click <a href="">aquí</a></p>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</form>
+{% endblock %}

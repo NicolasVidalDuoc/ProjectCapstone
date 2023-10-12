@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 style="text-align: center;">Página de Noticias</h1>
+<p style="text-align: center;">Aquí encontrarás todas las noticias de SORTE</p>
+<div class="container">
+    <div class="row">
+        {% for noticia in noticias %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if noticia.imagen_noticia %}
+                        <img class="img-fluid" src="{{ noticia.imagen_noticia.url }}" alt="">
+                    {% else %}
+                        <p>No hay imagen disponible</p>
+                    {% endif %}
+                    <h5 class="card-title">{{noticia.titulo}}</h5>
+                    <p class="card-text">{{noticia.subtitulo}}</p>
+                    <p class="card-text">{{noticia.descripcion}}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted"><b>Fecha de Creación</b>: {{noticia.fecha_de_creacion}}</small><br>
+                    <small class="text-muted"><b>Fecha de Actualización</b>: {{noticia.fecha_de_actualizacion}}</small><br>
+                </div>
+
+                {% if user.is_staff %}
+                <div class="card-footer text-center">
+                    <a href="{% url 'editar_noticia' noticia.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_noticia' noticia.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
